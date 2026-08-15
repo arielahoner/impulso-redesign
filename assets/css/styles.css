@@ -401,6 +401,15 @@ html.dark .theme-toggle .moon { display: none; }
 .wa-btn { background: #25d366; color: #06311a; border: none; }
 .wa-btn:hover { transform: scale(1.02); }
 
+/* ---------- WhatsApp flotante ---------- */
+.wa-float { position: fixed; right: 1.1rem; bottom: 1.1rem; z-index: 80; display: inline-flex; align-items: center; justify-content: center; width: 3.4rem; height: 3.4rem; border-radius: 50%; background: #25d366; color: #06311a; box-shadow: 0 12px 28px -10px oklch(0.3 0.08 150 / .55), 0 2px 8px -2px oklch(0.2 0.02 230 / .25); transition: transform .18s ease, box-shadow .18s ease; }
+.wa-float svg { width: 1.7rem; height: 1.7rem; }
+.wa-float:hover { transform: scale(1.07); box-shadow: 0 16px 34px -10px oklch(0.3 0.08 150 / .65); }
+.wa-float:active { transform: scale(1); }
+.wa-float:focus-visible { outline: none; box-shadow: 0 0 0 3px color-mix(in oklab, #25d366 55%, transparent), 0 12px 28px -10px oklch(0.3 0.08 150 / .55); }
+@media (min-width: 768px) { .wa-float { right: 1.6rem; bottom: 1.6rem; width: 3.6rem; height: 3.6rem; } }
+@media print { .wa-float { display: none; } }
+
 /* ---------- Toast ---------- */
 .toast {
   position: fixed; left: 50%; bottom: 1.5rem; transform: translateX(-50%) translateY(2rem);
