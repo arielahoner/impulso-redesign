@@ -46,6 +46,18 @@ deploys posteriores no lo tocan. La plantilla es `api/config.example.php`.
 cabeceras de seguridad y define el Content-Security-Policy. Si el deploy lo
 omite, el formulario y Google Analytics quedan bloqueados por el navegador.
 
+## Al cambiar CSS o JavaScript: subir la versión
+
+Los enlaces al CSS y al JS llevan un parámetro de versión:
+`assets/css/styles.css?v=20260815`. El `.htaccess` pide un mes de caché para esos
+archivos, así que sin ese parámetro un visitante que ya estuvo en el sitio
+seguiría viendo la hoja de estilos antigua.
+
+**Cada vez que edites `styles.css`, `main.js` o `analytics.js`, cambia el número
+de versión en las 18 páginas** (basta un buscar-y-reemplazar de `?v=20260815`
+por la fecha nueva). Si no lo haces, tus cambios no se verán en los navegadores
+que ya visitaron el sitio.
+
 ## Al modificar el script inline del tema
 
 Cada página lleva en el `<head>` un script inline de una línea que aplica el

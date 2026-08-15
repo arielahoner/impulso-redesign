@@ -3,8 +3,8 @@ branch: main
 
 ## Last sync
 
-date: 2026-08-15T21:12:14Z
-tree: 32940376a612
+date: 2026-08-15T21:21:34Z
+tree: 639c71de2f0a
 
 ### Updated in this project
 
@@ -15,18 +15,22 @@ tree: 32940376a612
 
 ## Estado del repositorio
 
-El repositorio contiene todavía la versión anterior del sitio, duplicada en la
-raíz y en `site/`. Este proyecto la reemplaza por completo. Los pasos de limpieza
-y publicación están en `DEPLOY.md`.
+Sincronizado. El push del 15 de agosto de 2026 reemplazó por completo la versión
+anterior: se eliminaron los 19 archivos antiguos (incluida la carpeta `site/`
+duplicada y los assets en desuso) y se subieron los 36 del rediseño.
 
-El acceso a GitHub desde este proyecto es de solo lectura: los archivos se
-suben con `git push` desde el equipo del usuario.
+Verificado en el repositorio: `.htaccess` presente con el CSP correcto,
+`site/` eliminada, y `api/config.php` ausente por diseño (solo viaja la
+plantilla `config.example.php`; la API key se sube por FTP al servidor).
+
+El acceso a GitHub desde este proyecto es de solo lectura: los archivos se suben
+con `bash publicar.sh` desde el equipo del usuario.
 
 ## Screen map
 
 | Página del proyecto | Origen en el repositorio |
 |---|---|
-| index.html | reemplaza index.html y site/index.html |
+| index.html | reemplazó index.html y site/index.html |
 | servicios.html | nueva |
 | casos.html | nueva |
 | caso-licitaciones-energia-solar.html | nueva |
@@ -42,9 +46,9 @@ suben con `git push` desde el equipo del usuario.
 | nosotros.html | nueva |
 | contacto.html | nueva |
 | privacidad.html · terminos.html · 404.html | nuevas |
-| assets/css/styles.css | reemplaza styles.css y site/styles.css |
-| assets/js/main.js | reemplaza main.js y site/main.js |
+| assets/css/styles.css | reemplazó styles.css y site/styles.css |
+| assets/js/main.js | reemplazó main.js y site/main.js |
 | assets/js/analytics.js | nuevo |
 | api/contacto.php · api/config.example.php | nuevos |
-| sitemap.xml · robots.txt | reemplazan las versiones de la raíz y de site/ |
+| sitemap.xml · robots.txt | reemplazaron las versiones de la raíz y de site/ |
 | .htaccess | nuevo |
