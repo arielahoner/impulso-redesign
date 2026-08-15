@@ -11,7 +11,7 @@
 (function () {
   "use strict";
 
-  var GA4_ID = "";
+  var GA4_ID = "G-FYLFN4ZEZY";
 
   if (!GA4_ID || GA4_ID.indexOf("G-") !== 0) return;
 

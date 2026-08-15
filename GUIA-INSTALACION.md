@@ -78,13 +78,15 @@ Si algo falla, el error queda en el log de errores de PHP de Hostinger (hPanel �
 
 ### 2.2 Activarlo en el sitio
 
-Abre **`assets/js/analytics.js`** y pega el ID en la primera línea de código:
+**Ya está hecho** (15 de agosto de 2026). En `assets/js/analytics.js`:
 
 ```js
-var GA4_ID = "G-XXXXXXXXXX";
+var GA4_ID = "G-FYLFN4ZEZY";
 ```
 
-Eso es todo: las 7 páginas ya cargan ese archivo. Mientras el valor esté vacío, Google Analytics no se carga y no se instala ninguna cookie de terceros.
+Las 18 páginas cargan ese archivo. Si alguna vez cambias el ID, sube también el
+número de versión (`?v=20260816`) en las 18 páginas, o los navegadores seguirán
+usando la copia cacheada y la medición no cambiará.
 
 ### 2.3 Eventos que ya están programados
 
