@@ -70,3 +70,8 @@ ErrorDocument 404 /404.html
 <FilesMatch "^config(\.example)?\.php$">
   Require all denied
 </FilesMatch>
+
+# Documentación interna y scripts: viven en el repositorio, no se sirven por web.
+<FilesMatch "\.(md|sh)$">
+  Require all denied
+</FilesMatch>
