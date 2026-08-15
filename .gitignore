@@ -1,0 +1,14 @@
+# Archivos que NUNCA van al repositorio
+
+# API key de Resend — se sube una sola vez por FTP al servidor
+api/config.php
+
+# Material de trabajo y archivos subidos, no forman parte del sitio
+uploads/
+screenshots/
+.thumbnail
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.log
