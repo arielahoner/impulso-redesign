@@ -154,7 +154,7 @@ if (!empty($cfg['autoreply'])) {
             . '<p>Hola ' . $e($first) . ',</p>'
             . '<p>Recibimos tu mensaje. Lo lee una persona del equipo, no un bot, y te respondemos en menos de 24 horas hábiles.</p>'
             . '<p>Mientras tanto, si quieres ver el tipo de proyectos que construimos: '
-            . '<a href="https://impulsoestrategicocx.com/casos.html" style="color:#0084A8">impulsoestrategicocx.com/casos</a>.</p>'
+            . '<a href="https://impulsoestrategicocx.com/casos/" style="color:#0084A8">impulsoestrategicocx.com/casos</a>.</p>'
             . '<p style="margin-top:28px">Ariel Sáez y Federico Orduz<br />'
             . '<span style="color:#4F6A74;font-size:13px">Impulso Estratégico CX &amp; AI</span></p>'
             . '</div>';

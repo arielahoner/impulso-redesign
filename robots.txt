@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://impulsoestrategicocx.com/sitemap.xml
+Sitemap: https://impulsoestrategicocx.com/sitemap-index.xml

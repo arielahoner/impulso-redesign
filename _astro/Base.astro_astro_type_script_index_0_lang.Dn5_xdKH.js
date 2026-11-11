@@ -1,0 +1,1 @@
+var e=[`G-4MYLNZF5N3`,`G-FYLFN4ZEZY`];if(e.length){let t=document.createElement(`script`);t.async=!0,t.src=`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(e[0])}`,document.head.appendChild(t),window.dataLayer=window.dataLayer||[],window.gtag=function(){window.dataLayer.push(arguments)},window.gtag(`js`,new Date);for(let t of e)window.gtag(`config`,t)}

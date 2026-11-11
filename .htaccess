@@ -1,77 +1,71 @@
-# ===== Impulso Estratégico CX & AI · Hostinger (.htaccess) =====
+# ===== Impulso Estratégico CX & AI · Hostinger (.htaccess) · web nueva (Astro) =====
+# Ojo: public_html también tiene api/ (formulario), contenido/ y .git/ del sitio anterior. No borrarlos al subir.
 
-# Página de error 404 personalizada
 ErrorDocument 404 /404.html
+DirectoryIndex index.html
+Options -Indexes
 
-# Forzar HTTPS
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # www -> dominio principal en un solo salto
+  RewriteCond %{HTTP_HOST} ^www\.impulsoestrategicocx\.com$ [NC]
+  RewriteRule ^ https://impulsoestrategicocx.com%{REQUEST_URI} [L,R=301]
+
+  # Forzar HTTPS
   RewriteCond %{HTTPS} off
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Direcciones del sitio anterior (ago-2026) -> nuevas (301, conserva UTM)
+  RewriteRule ^index\.html$ / [R=301,L]
+  RewriteRule ^servicios\.html$ /soluciones/ [R=301,L]
+  RewriteRule ^casos\.html$ /casos/ [R=301,L]
+  RewriteRule ^ia-energia-solar\.html$ /soluciones/vigila-oportunidades/ [R=301,L]
+  RewriteRule ^automatizacion-ventas-b2b\.html$ /soluciones/vende-mas/ [R=301,L]
+  RewriteRule ^software-comercio-ecommerce\.html$ /soluciones/deja-el-excel/ [R=301,L]
+  RewriteRule ^automatizacion-head-hunting\.html$ /soluciones/deja-el-excel/ [R=301,L]
+  RewriteRule ^software-agroindustria\.html$ /soluciones/deja-el-excel/ [R=301,L]
+  RewriteRule ^caso-licitaciones-energia-solar\.html$ /casos/licitaciones-energia-solar/ [R=301,L]
+  RewriteRule ^caso-prospeccion-b2b\.html$ /casos/prospeccion-b2b/ [R=301,L]
+  RewriteRule ^caso-crm-ecommerce-comercio\.html$ /casos/crm-ecommerce-comercio/ [R=301,L]
+  RewriteRule ^caso-automatizacion-head-hunting\.html$ /casos/automatizacion-head-hunting/ [R=301,L]
+  RewriteRule ^caso-crm-erp-agroindustria\.html$ /casos/crm-erp-agroindustria/ [R=301,L]
+  RewriteRule ^contacto\.html$ /radiografia/ [R=301,L]
+  RewriteRule ^blog\.html$ /aprende/ [R=301,L]
+  RewriteRule ^blog-crm-a-medida-cuando-conviene\.html$ /aprende/crm-a-medida-cuando-conviene/ [R=301,L]
+  RewriteRule ^nosotros\.html$ /nosotros/ [R=301,L]
+  RewriteRule ^privacidad\.html$ /privacidad/ [R=301,L]
+  RewriteRule ^terminos\.html$ /terminos/ [R=301,L]
+  RewriteRule ^sitemap\.xml$ /sitemap-index.xml [R=301,L]
+
+  # Bloquear archivos internos (documentos, git, configuración)
+  RewriteRule (^|/)\.(?!well-known/) - [F,L]
+  RewriteRule \.(md|mjs|ts|json|lock|log|sh|py|env|yml|yaml)$ - [F,L]
+  RewriteRule ^contenido(/|$) - [F,L]
+  RewriteRule ^api/config(\.example)?\.php$ - [F,L]
 </IfModule>
 
-# ===== Cabeceras de seguridad =====
 <IfModule mod_headers.c>
-  # Fuerza HTTPS durante 1 año en navegadores (incluye subdominios).
   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
-
-  # Evita que el sitio se incruste en iframes de terceros (clickjacking).
   Header always set X-Frame-Options "DENY"
-
-  # Impide que el navegador "adivine" el tipo de archivo (MIME sniffing).
   Header always set X-Content-Type-Options "nosniff"
-
-  # Controla cuánta info de referencia se envía a otros sitios.
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
 
-  # Desactiva APIs sensibles del navegador que el sitio no usa.
-  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
-
-  # Content-Security-Policy: lista blanca de orígenes permitidos.
-  # script-src incluye el hash del único script inline (el del tema claro/oscuro
-  # en el <head>). Si modificas ese script, regenera el hash o la página no cargará.
-  # googletagmanager / google-analytics están permitidos para GA4.
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-pju4LYfnNkuP8J+7/y9gvjSWf8x+o5xIoFhcZeNdMjQ=' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
-
-  # No cachear el HTML (para que cambios de contenido se vean al instante).
-  <FilesMatch "\.html$">
+  # Caché: archivos con huella (_astro/) un año; imágenes 30 días; HTML siempre fresco
+  <FilesMatch "\.(js|css|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(webp|png|jpg|jpeg|svg|ico)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+  <FilesMatch "\.(html|xml|txt)$">
     Header set Cache-Control "no-cache, must-revalidate"
   </FilesMatch>
 </IfModule>
 
-# ===== Compresión =====
-# Brotli (más eficiente) cuando el servidor lo soporta.
-<IfModule mod_brotli.c>
-  AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/plain text/xml application/javascript application/json image/svg+xml
-</IfModule>
-# GZIP como respaldo universal.
-<IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json image/svg+xml
-</IfModule>
-
-# ===== Cache de estáticos =====
-<IfModule mod_expires.c>
-  ExpiresActive On
-  ExpiresByType text/css "access plus 1 month"
-  ExpiresByType application/javascript "access plus 1 month"
-  ExpiresByType image/webp "access plus 1 year"
-  ExpiresByType image/png "access plus 1 year"
-  ExpiresByType image/jpeg "access plus 1 year"
-  ExpiresByType image/x-icon "access plus 1 year"
-  ExpiresByType image/svg+xml "access plus 1 year"
-</IfModule>
-
-# Protege archivos sensibles.
-<FilesMatch "^\.(htaccess|htpasswd|env|gitignore)$">
-  Require all denied
-</FilesMatch>
-
-# La configuración del formulario (contiene la API key de Resend) nunca se sirve.
-<FilesMatch "^config(\.example)?\.php$">
-  Require all denied
-</FilesMatch>
-
-# Documentación interna y scripts: viven en el repositorio, no se sirven por web.
-<FilesMatch "\.(md|sh)$">
-  Require all denied
-</FilesMatch>
+AddDefaultCharset UTF-8
+AddType text/html;charset=UTF-8 .html
+AddType image/webp .webp
+AddType font/woff2 .woff2
