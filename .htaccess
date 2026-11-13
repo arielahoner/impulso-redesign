@@ -41,6 +41,8 @@ Options -Indexes
 
   # Bloquear archivos internos (documentos, git, configuración)
   RewriteRule (^|/)\.(?!well-known/) - [F,L]
+  # Excepción: los recursos descargables de las clases (flujo .json de n8n, textos .md) son públicos
+  RewriteRule ^recursos/[a-z0-9-]+\.(json|md|pdf)$ - [L]
   RewriteRule \.(md|mjs|ts|json|lock|log|sh|py|env|yml|yaml)$ - [F,L]
   RewriteRule ^contenido(/|$) - [F,L]
   RewriteRule ^api/config(\.example)?\.php$ - [F,L]
@@ -53,6 +55,11 @@ Options -Indexes
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
   Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+
+  # Sitio de demostración de la clase 12 (marca ficticia): que no aparezca en Google
+  <If "%{REQUEST_URI} =~ m#^/demo/#">
+    Header set X-Robots-Tag "noindex, nofollow"
+  </If>
 
   # Caché: archivos con huella (_astro/) un año; imágenes 30 días; HTML siempre fresco
   <FilesMatch "\.(js|css|woff2)$">

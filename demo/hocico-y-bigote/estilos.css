@@ -1,0 +1,987 @@
+/* Hocico y Bigote · tienda de barrio ficticia (Clase 12 de Impulso Estratégico CX & AI)
+   Paleta: terracota #D9643A, salvia #8FAE8B, crema #FFF6EC, café #3A2A22, mostaza #E8B04A.
+   Títulos en Baloo 2, texto en Nunito. */
+
+:root {
+  --terracota: #d9643a;
+  --terracota-oscuro: #b04a26; /* terracota para texto chico sobre crema (contraste 5,1:1) */
+  --salvia: #8fae8b;
+  --salvia-clara: #e4ece1;
+  --crema: #fff6ec;
+  --crema-oscura: #f7e8d6;
+  --cafe: #3a2a22;
+  --cafe-suave: #6b574c;
+  --mostaza: #e8b04a;
+  --tarjeta: #fffbf6;
+  --borde: rgba(58, 42, 34, 0.13);
+  --sombra: 0 1px 2px rgba(58, 42, 34, 0.05), 0 10px 28px rgba(58, 42, 34, 0.07);
+  --radio: 20px;
+  --fuente-titulos: "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+  --fuente-texto: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--crema);
+  color: var(--cafe);
+  font-family: var(--fuente-texto);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  overflow-wrap: break-word;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--terracota-oscuro);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--cafe);
+}
+
+a:focus-visible {
+  outline: 3px solid var(--mostaza);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  line-height: 1.12;
+  margin: 0 0 0.45em;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 1.4rem + 3.2vw, 3.5rem);
+}
+
+h2 {
+  font-size: clamp(1.6rem, 1.25rem + 1.5vw, 2.25rem);
+}
+
+h3 {
+  font-size: 1.3rem;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+ul,
+ol {
+  margin: 0 0 1em;
+  padding-left: 1.3em;
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
+.envoltura {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Encabezado y navegación ---------- */
+
+.cabecera {
+  background: var(--crema);
+  border-bottom: 1px solid var(--borde);
+}
+
+.cabecera-fila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 24px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.marca {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--cafe);
+  text-decoration: none;
+}
+
+.marca:hover {
+  color: var(--cafe);
+}
+
+.marca svg {
+  width: 74px;
+  height: auto;
+  flex: none;
+}
+
+.marca-nombre {
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 1;
+  padding-top: 5px;
+}
+
+.navegacion ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navegacion li {
+  margin: 0;
+}
+
+.navegacion a {
+  display: block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  color: var(--cafe);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.navegacion a:hover {
+  background: var(--crema-oscura);
+}
+
+.navegacion a[aria-current="page"],
+.navegacion a.activo {
+  background: var(--salvia-clara);
+  box-shadow: inset 0 0 0 1.5px var(--salvia);
+}
+
+/* ---------- Piezas comunes ---------- */
+
+.etiqueta {
+  margin: 0 0 10px;
+  color: var(--terracota-oscuro);
+  font-weight: 800;
+  font-size: 0.98rem;
+}
+
+.bajada {
+  max-width: 60ch;
+  color: var(--cafe-suave);
+  font-size: 1.2rem;
+}
+
+.seccion {
+  padding: 64px 0;
+}
+
+.seccion-ajustada {
+  padding-top: 8px;
+}
+
+.seccion-pegada {
+  padding-top: 0;
+}
+
+.seccion-crema-oscura {
+  background: var(--crema-oscura);
+}
+
+.seccion-cabeza {
+  max-width: 660px;
+  margin-bottom: 30px;
+}
+
+.seccion-cabeza p {
+  color: var(--cafe-suave);
+  font-size: 1.12rem;
+}
+
+.cabeza-pagina {
+  padding: 52px 0 28px;
+}
+
+.botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.boton {
+  display: inline-block;
+  padding: 11px 24px;
+  border-radius: 999px;
+  font-family: var(--fuente-texto);
+  font-weight: 800;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  text-decoration: none;
+}
+
+.boton-principal {
+  background: var(--terracota);
+  color: var(--crema);
+}
+
+.boton-principal:hover {
+  background: var(--terracota-oscuro);
+  color: var(--crema);
+}
+
+.boton-secundario {
+  border: 2px solid var(--cafe);
+  color: var(--cafe);
+}
+
+.boton-secundario:hover {
+  background: var(--cafe);
+  color: var(--crema);
+}
+
+.mas {
+  margin: 30px 0 0;
+}
+
+.nota {
+  color: var(--cafe-suave);
+}
+
+/* ---------- Portada (inicio) ---------- */
+
+.portada {
+  padding: 44px 0 56px;
+}
+
+.portada-rejilla {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.portada h1 em {
+  font-style: normal;
+  color: var(--terracota);
+  background: linear-gradient(transparent 78%, rgba(232, 176, 74, 0.55) 78%);
+}
+
+.portada-bajada {
+  max-width: 40ch;
+  color: var(--cafe-suave);
+  font-size: 1.2rem;
+}
+
+.portada-foto img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: 50% 62%;
+  border-radius: 28px;
+  box-shadow: var(--sombra);
+}
+
+.banda {
+  background: var(--terracota);
+  color: var(--crema);
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  padding: 15px 16px;
+}
+
+.banda p {
+  margin: 0;
+}
+
+/* ---------- Tarjetas con foto ---------- */
+
+.rejilla-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 24px;
+}
+
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.tarjeta img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.tarjeta-cuerpo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 20px 22px 22px;
+}
+
+.tarjeta-enlace {
+  margin: auto 0 0;
+  font-weight: 800;
+}
+
+/* ---------- Productos ---------- */
+
+.productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  gap: 22px;
+}
+
+.inicio-destacados .productos {
+  grid-template-columns: repeat(auto-fill, minmax(min(420px, 100%), 1fr));
+}
+
+.producto {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.producto p {
+  font-size: 1rem;
+}
+
+.icono {
+  width: 52px;
+  height: 52px;
+  flex: none;
+}
+
+/* El ícono va suelto dentro de la tarjeta (sin envoltorio), al lado de la etiqueta. */
+.producto > .icono {
+  position: absolute;
+  top: 22px;
+  left: 22px;
+}
+
+.producto .producto-tipo {
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  margin: 0 0 14px;
+  padding-left: 64px;
+  color: var(--cafe-suave);
+  font-weight: 800;
+  font-size: 0.92rem;
+  line-height: 1.3;
+}
+
+.producto h3 {
+  margin-bottom: 4px;
+}
+
+.producto .precio {
+  margin-bottom: 12px;
+  color: var(--terracota-oscuro);
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  font-size: 1.22rem;
+  line-height: 1.3;
+}
+
+.honesto {
+  margin: auto 0 0;
+  padding: 12px 14px;
+  background: var(--salvia-clara);
+  border-left: 4px solid var(--salvia);
+  border-radius: 6px 14px 14px 6px;
+}
+
+.categoria {
+  padding: 44px 0 20px;
+}
+
+.categoria + .categoria {
+  border-top: 1px solid var(--borde);
+}
+
+.categoria-bajada {
+  max-width: 62ch;
+  color: var(--cafe-suave);
+  margin-bottom: 24px;
+}
+
+.como-leer {
+  max-width: 700px;
+  margin-top: 24px;
+  padding: 18px 22px;
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+}
+
+.como-leer ul {
+  margin-bottom: 0.6em;
+}
+
+.como-leer p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Valores, Club Hocico y feria ---------- */
+
+.valores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  gap: 20px;
+}
+
+.valor {
+  padding: 22px;
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-top: 6px solid var(--terracota);
+  border-radius: var(--radio);
+}
+
+.valor h3 {
+  font-size: 1.22rem;
+}
+
+.valor p {
+  margin: 0;
+}
+
+.dupla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 24px;
+}
+
+.club,
+.feria {
+  padding: 32px;
+  border-radius: 28px;
+}
+
+.club {
+  background: var(--crema-oscura);
+}
+
+.feria {
+  background: var(--salvia);
+}
+
+.club p:last-child,
+.feria p:last-child {
+  margin-bottom: 0;
+}
+
+.sello {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: var(--mostaza);
+  color: var(--cafe);
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.sello-claro {
+  background: var(--crema);
+}
+
+/* ---------- Cierre y firma ---------- */
+
+.cierre {
+  padding: 60px 0 6px;
+  text-align: center;
+}
+
+.cierre p {
+  max-width: 50ch;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.15rem;
+}
+
+.despedida {
+  padding: 10px 0 64px;
+  text-align: center;
+}
+
+.firma {
+  margin: 0;
+  color: var(--terracota);
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 1.3rem + 1.5vw, 2.3rem);
+  line-height: 1.2;
+}
+
+.huella {
+  font-size: 0.85em;
+}
+
+/* ---------- Nosotros ---------- */
+
+.historia {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.historia-foto {
+  margin: 0;
+}
+
+.historia-foto img {
+  border-radius: 28px;
+  box-shadow: var(--sombra);
+}
+
+.historia-texto h2 {
+  margin-top: 1.2em;
+}
+
+.creencias {
+  max-width: 760px;
+  padding-left: 1.2em;
+}
+
+/* ---------- Preguntas frecuentes ---------- */
+
+.preguntas {
+  max-width: 760px;
+}
+
+.pregunta {
+  padding: 26px 0 10px;
+  border-top: 1px solid var(--borde);
+}
+
+.pregunta h2 {
+  font-size: clamp(1.35rem, 1.2rem + 0.6vw, 1.6rem);
+}
+
+/* ---------- Blog ---------- */
+
+.lista-articulos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+  gap: 22px;
+}
+
+.articulo-tarjeta {
+  padding: 26px;
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.articulo-tarjeta h2 {
+  font-size: 1.45rem;
+}
+
+.articulo-tarjeta h2 a {
+  color: var(--cafe);
+  text-decoration: none;
+}
+
+.articulo-tarjeta h2 a:hover {
+  color: var(--terracota-oscuro);
+  text-decoration: underline;
+}
+
+.articulo-tarjeta p:last-child {
+  margin-bottom: 0;
+}
+
+.leer {
+  font-weight: 800;
+}
+
+.tema {
+  margin-bottom: 8px;
+  color: var(--terracota-oscuro);
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.articulo {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.articulo h1 {
+  font-size: clamp(2rem, 1.4rem + 2.4vw, 3rem);
+}
+
+.articulo h2 {
+  margin-top: 1.5em;
+  font-size: clamp(1.45rem, 1.25rem + 0.8vw, 1.8rem);
+}
+
+.articulo .bajada {
+  font-size: 1.25rem;
+}
+
+.articulo-cuerpo {
+  padding-bottom: 8px;
+}
+
+.plan {
+  padding: 18px 22px 18px 2.4em;
+  background: var(--salvia-clara);
+  border-radius: var(--radio);
+}
+
+.volver {
+  margin-top: 28px;
+  font-weight: 800;
+}
+
+/* ---------- Prensa ---------- */
+
+.logo-vitrina {
+  display: grid;
+  place-items: center;
+  padding: 40px 24px;
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+}
+
+.logo-vitrina img {
+  width: min(460px, 100%);
+}
+
+.dos-columnas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 32px;
+  align-items: start;
+}
+
+.descargas {
+  display: grid;
+  gap: 10px;
+  padding: 0;
+  list-style: none;
+}
+
+.descargas li {
+  margin: 0;
+}
+
+.descargas li {
+  padding: 12px 16px;
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  line-height: 1.45;
+}
+
+.descargas a {
+  font-weight: 800;
+}
+
+.descargas span {
+  color: var(--cafe-suave);
+  font-size: 0.95rem;
+}
+
+.paleta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr));
+  gap: 16px;
+}
+
+.color {
+  overflow: hidden;
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+}
+
+.color-muestra {
+  height: 104px;
+  border-bottom: 1px solid var(--borde);
+}
+
+.color-datos {
+  padding: 14px 16px 16px;
+}
+
+.color-datos h3 {
+  margin-bottom: 4px;
+  font-size: 1.2rem;
+}
+
+.color-datos p {
+  margin: 0 0 4px;
+  font-size: 0.98rem;
+}
+
+.codigo {
+  font-weight: 800;
+}
+
+.tipografias {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 20px;
+}
+
+.tipografia {
+  padding: 24px;
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+}
+
+.tipografia p:last-child {
+  margin-bottom: 0;
+}
+
+.tipografias + .nota {
+  margin-top: 16px;
+}
+
+.muestra-titulos,
+.muestra-texto {
+  margin-bottom: 8px;
+  font-size: 3.2rem;
+  line-height: 1;
+}
+
+/* La muestra «Aa» va en CSS para que no ensucie el texto que lee un crawler. */
+.muestra-titulos::before,
+.muestra-texto::before {
+  content: "Aa";
+}
+
+.muestra-titulos {
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+}
+
+.muestra-texto {
+  font-family: var(--fuente-texto);
+}
+
+.reglas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 20px;
+}
+
+.reglas > div {
+  padding: 24px;
+  border-radius: var(--radio);
+}
+
+.reglas-si {
+  background: var(--salvia-clara);
+}
+
+.reglas-nunca {
+  background: var(--crema-oscura);
+}
+
+.reglas h3 {
+  font-size: 1.25rem;
+}
+
+.reglas ul {
+  margin: 0;
+}
+
+.fotos-referencia {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: 22px;
+}
+
+.fotos-referencia figure {
+  margin: 0;
+}
+
+.fotos-referencia img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.fotos-referencia figcaption {
+  padding-top: 10px;
+  font-size: 0.98rem;
+}
+
+.fotos-referencia figcaption p {
+  margin: 0;
+}
+
+.prensa-bloque {
+  padding: 48px 0;
+  border-top: 1px solid var(--borde);
+}
+
+.quienes p {
+  max-width: 64ch;
+  margin-bottom: 0.35em;
+  font-size: 1.15rem;
+}
+
+/* ---------- Pie ---------- */
+
+.pie {
+  padding: 42px 0 30px;
+  background: var(--cafe);
+  color: #f3e6d8;
+  font-size: 0.95rem;
+}
+
+.pie a {
+  color: var(--mostaza);
+}
+
+.pie a:hover {
+  color: var(--crema);
+}
+
+.pie p {
+  margin-bottom: 0.4em;
+}
+
+.pie-columnas {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 24px;
+}
+
+.pie-titulo {
+  color: var(--crema);
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.pie-aviso {
+  margin-top: 26px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 246, 236, 0.18);
+  color: rgba(255, 246, 236, 0.78);
+  font-size: 0.82rem;
+}
+
+/* ---------- Pantallas medianas y chicas ---------- */
+
+@media (max-width: 900px) {
+  .portada-rejilla,
+  .historia {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .portada-foto {
+    order: -1;
+  }
+
+  .portada-foto img {
+    aspect-ratio: 16 / 9;
+  }
+
+  .pie-columnas {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .envoltura {
+    padding: 0 16px;
+  }
+
+  .cabecera-fila {
+    justify-content: center;
+  }
+
+  .navegacion ul {
+    justify-content: center;
+  }
+
+  .navegacion a {
+    padding: 5px 10px;
+    font-size: 0.97rem;
+  }
+
+  .marca svg {
+    width: 54px;
+  }
+
+  .marca-nombre {
+    font-size: 1.45rem;
+  }
+
+  .portada {
+    padding: 24px 0 40px;
+  }
+
+  .seccion {
+    padding: 48px 0;
+  }
+
+  .club,
+  .feria {
+    padding: 26px 22px;
+  }
+
+  .banda {
+    font-size: 1.15rem;
+  }
+
+  .pie-columnas {
+    grid-template-columns: 1fr;
+  }
+
+  .productos,
+  .inicio-destacados .productos {
+    grid-template-columns: 1fr;
+  }
+}
